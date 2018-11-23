@@ -1,10 +1,10 @@
 
 # NOTE:
-This version of Insights has been modified to work with pivxd and requires a running instance of pivxd to connect to. This does not necessarily have to be local but if it is not you need to specify the BITCOIND_HOST environment variable as such. It also runs on port 8015 by default, should you wish the change the running port you may do so in config/config.js on the 'port' variable for which network you are using. 
+This version of Insights has been modified to work with bltgd and requires a running instance of bltgd to connect to. This does not necessarily have to be local but if it is not you need to specify the BITCOIND_HOST environment variable as such. It also runs on port 8015 by default, should you wish the change the running port you may do so in config/config.js on the 'port' variable for which network you are using.
 
 # *insight API*
 
-*insight API* is an open-source bitcoin[PIVX] blockchain REST
+*insight API* is an open-source bitcoin[BLTG] blockchain REST
 and websocket API. Insight API runs in NodeJS and uses LevelDB for storage.
 
 This is a backend-only service. If you're looking for the web frontend application,
@@ -17,23 +17,23 @@ A blockchain explorer front-end has been developed on top of *Insight API*. It c
 be downloaded at [Github Insight Repository](https://github.com/bitpay/insight).
 
 ## Warning
-  Insight file sync does not work with **pivxd** 
-  In order to use Insight you must set the environment variable INSIGHT_FORCE_RPC_SYNC = 1 
-  Since file sync does not work the RPC sync is run on a timed interval every 60000 ms. This matches the interval at which new blocks are added to the network but it does leave the possibility of being up to 59 seconds behind the blockchain depending on what time the server was started at. 
+  Insight file sync does not work with **bltgd**
+  In order to use Insight you must set the environment variable INSIGHT_FORCE_RPC_SYNC = 1
+  Since file sync does not work the RPC sync is run on a timed interval every 60000 ms. This matches the interval at which new blocks are added to the network but it does leave the possibility of being up to 59 seconds behind the blockchain depending on what time the server was started at.
 
 ## Prerequisites
 
-* **pivxd** - Download and Install [PIVX](https://pivx.org/wallet/)
+* **bltgd** - Download and Install [BLTG](https://block-logic.com/#Wallets)
 
-*insight API* needs a *trusted* pivxd node to run. *insight API* will connect to the node
-through the RPC API, pivx peer-to-peer protocol, and will even read its raw block .dat files for syncing.
+*insight API* needs a *trusted* bltgd node to run. *insight API* will connect to the node
+through the RPC API, bltg peer-to-peer protocol, and will even read its raw block .dat files for syncing.
 
-Configure pivxd to listen to RPC calls and set `txindex` to true.
-The easiest way to do this is by copying `./etc/pivxd/pivx.conf` to your
-bitcoin data directory (usually `~/.pivx` on Linux, `%appdata%\Pivx\` on Windows,
-or `~/Library/Application Support/Pivx` on Mac OS X).
+Configure bltgd to listen to RPC calls and set `txindex` to true.
+The easiest way to do this is by copying `./etc/bltgd/bltg.conf` to your
+bitcoin data directory (usually `~/.bltg` on Linux, `%appdata%\Bltg\` on Windows,
+or `~/Library/Application Support/Bltg` on Mac OS X).
 
-pivxd must be running and must have finished downloading the blockchain **before** running *insight API*.
+bltgd must be running and must have finished downloading the blockchain **before** running *insight API*.
 
 
 * **Node.js v0.10.x** - Download and Install [Node.js](http://www.nodejs.org/download/).
@@ -46,7 +46,7 @@ pivxd must be running and must have finished downloading the blockchain **before
 
   To install Insight API, clone the main repository:
 
-    $ git clone https://github.com/genitrust/insight-api-pivx && cd insight-api-pivx
+    $ git clone https://github.com/genitrust/insight-api-bltg && cd insight-api-bltg
 
   Install dependencies:
 
@@ -70,13 +70,13 @@ pivxd must be running and must have finished downloading the blockchain **before
 All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file. There you can specify your application name and database name. Certain configuration values are pulled from environment variables if they are defined:
 
 ```
-BITCOIND_HOST         # RPC pivxd host
-BITCOIND_PORT         # RPC pivxd Port
-BITCOIND_P2P_HOST     # P2P pivxd Host (will default to BITCOIND_HOST, if specified)
-BITCOIND_P2P_PORT     # P2P pivxd Port
+BITCOIND_HOST         # RPC bltgd host
+BITCOIND_PORT         # RPC bltgd Port
+BITCOIND_P2P_HOST     # P2P bltgd Host (will default to BITCOIND_HOST, if specified)
+BITCOIND_P2P_PORT     # P2P bltgd Port
 BITCOIND_USER         # RPC username
 BITCOIND_PASS         # RPC password
-BITCOIND_DATADIR      # pivxd datadir. 'testnet4' will be appended automatically if testnet is used. NEED to finish with '/'. e.g: `/vol/data/`
+BITCOIND_DATADIR      # bltgd datadir. 'testnet4' will be appended automatically if testnet is used. NEED to finish with '/'. e.g: `/vol/data/`
 INSIGHT_NETWORK [= 'livenet' | 'testnet']
 INSIGHT_PORT          # insight api port
 INSIGHT_DB            # Path where to store insight's internal DB. (defaults to $HOME/.insight)

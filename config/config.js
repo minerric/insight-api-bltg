@@ -25,14 +25,14 @@ if (process.env.INSIGHT_NETWORK === 'livenet') {
   env = 'livenet';
   db = home;
   port = '8015';
-  b_port = '51473';
-  p2p_port = '51473';
+  b_port = '17128';
+  p2p_port = '17128';
 } else {
   env = 'testnet';
   db = home + '/testnet';
   port = '8015';
-  b_port = '51475';
-  p2p_port = '51475';
+  b_port = '18128';
+  p2p_port = '18128';
 }
 port = parseInt(process.env.INSIGHT_PORT) || port;
 
@@ -57,9 +57,9 @@ var isWin = /^win/.test(process.platform);
 var isMac = /^darwin/.test(process.platform);
 var isLinux = /^linux/.test(process.platform);
 if (!dataDir) {
-  if (isWin) dataDir = '%APPDATA%\\Pivx\\';
-  if (isMac) dataDir = process.env.HOME + '/Library/Application Support/Pivx/';
-  if (isLinux) dataDir = process.env.HOME + '/.pivx/';
+  if (isWin) dataDir = '%APPDATA%\\BLTG\\';
+  if (isMac) dataDir = process.env.HOME + '/Library/Application Support/Bltg/';
+  if (isLinux) dataDir = process.env.HOME + '/.bltg/';
 }
 dataDir += network === 'testnet' ? 'testnet4' : '';
 
